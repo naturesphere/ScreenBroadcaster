@@ -1,0 +1,21 @@
+screen split protocol:
+
+[8 bytes time stamp]    + 
+[1 bytes packet amount] +
+[1 bytes packet index]  +
+[data...]
+
+
+for long to byte array
+[01...7] => bytes [7]...[1][0]
+
+
+problem meeted:
+1: n |= (((long)(0xff&buf[i]))<<8*i); 
+the long must inside
+
+2:Arrays.copyOfRange(Data, from, to);
+the from to area is [from,to)!
+
+3:receiver.receive(packet);after receive, 
+the data is in buf,and length is packet.getLength()
